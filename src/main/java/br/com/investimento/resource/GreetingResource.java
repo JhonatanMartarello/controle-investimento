@@ -1,4 +1,4 @@
-package br.com.investimento.inicio;
+package br.com.investimento.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

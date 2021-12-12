@@ -2,6 +2,7 @@ package br.com.investimento.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -10,16 +11,21 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import br.com.investimento.dto.AtivoDTO;
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 @Entity
 @Table(name = "tb_ati_ativo")
-public class AtivoVO {
+public class AtivoVO extends PanacheEntityBase {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ati_cod_ativo")
     private Long codAtivo;
 
-    @Column(name = "ati_codigo_ativo")
-    private String codigoAtivo;
+    @Column(name = "ati_codigo_negociacao")
+    private String codigoNegociacao;
 
     @Column(name = "ati_nome")
     private String nome;
@@ -27,15 +33,26 @@ public class AtivoVO {
     @Column(name = "ati_cnpj")
     private Long cnpj;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ati_tipo_ativo")
+    @JsonIgnore
     private RegistroVO tipoAtivo;
 
     @OneToOne
     @JoinColumn(name = "ati_cod_ativo", referencedColumnName = "srv_ativo")
     private SaldoRendaVariavelVO saldoRendaVariavel;
 
-    public AtivoVO (){
+    public AtivoVO(){
+    }
+
+    public AtivoVO transformaEmObjeto(AtivoDTO ativoDTO){
+        return new AtivoVO(ativoDTO.getCodigoNegociacao(), ativoDTO.getNome(), ativoDTO.getCnpj(), ativoDTO.getTipoAtivo());
+    }
+
+    public AtivoVO(String codigoNegociacao, String nome, Long cnpj, String tipoAtivo) {
+        this.codigoNegociacao = codigoNegociacao;
+        this.nome = nome;
+        this.cnpj = cnpj;
     }
 
     @Override
@@ -44,7 +61,7 @@ public class AtivoVO {
         int result = 1;
         result = prime * result + ((cnpj == null) ? 0 : cnpj.hashCode());
         result = prime * result + ((codAtivo == null) ? 0 : codAtivo.hashCode());
-        result = prime * result + ((codigoAtivo == null) ? 0 : codigoAtivo.hashCode());
+        result = prime * result + ((codigoNegociacao == null) ? 0 : codigoNegociacao.hashCode());
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
         result = prime * result + ((tipoAtivo == null) ? 0 : tipoAtivo.hashCode());
         return result;
@@ -69,10 +86,10 @@ public class AtivoVO {
                 return false;
         } else if (!codAtivo.equals(other.codAtivo))
             return false;
-        if (codigoAtivo == null) {
-            if (other.codigoAtivo != null)
+        if (codigoNegociacao == null) {
+            if (other.codigoNegociacao != null)
                 return false;
-        } else if (!codigoAtivo.equals(other.codigoAtivo))
+        } else if (!codigoNegociacao.equals(other.codigoNegociacao))
             return false;
         if (nome == null) {
             if (other.nome != null)
@@ -97,12 +114,12 @@ public class AtivoVO {
         this.codAtivo = codAtivo;
     }
 
-    public String getCodigoAtivo() {
-        return codigoAtivo;
+    public String getCodigoNegociacao() {
+        return codigoNegociacao;
     }
 
-    public void setCodigoAtivo(String codigoAtivo) {
-        this.codigoAtivo = codigoAtivo;
+    public void setCodigoNegociacao(String codigoNegociacao) {
+        this.codigoNegociacao = codigoNegociacao;
     }
 
     public String getNome() {

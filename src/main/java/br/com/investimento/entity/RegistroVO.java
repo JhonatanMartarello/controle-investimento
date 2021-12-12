@@ -122,6 +122,8 @@ public class RegistroVO {
         this.complemento = complemento;
     }
 
-    
+    public String toString(){
+        return this.codRegistro + "";
+    }
     
 }
