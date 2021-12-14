@@ -30,6 +30,7 @@ public class AtivoResource {
     private AtivoController ativoController;
 
     @GET
+    @Path("/listar")
     public List<AtivoDTO> findAll(){
         return new AtivoDTO().transformaEmDTO(AtivoVO.listAll());
     }
@@ -56,13 +57,9 @@ public class AtivoResource {
     @PUT
     @Path("{codAtivo}")
     @Transactional
-    public Response update(@PathParam("codAtivo") Long codAtivo, AtivoVO ativo){
+    public Response update(@PathParam("codAtivo") Long codAtivo, AtivoDTO ativoDTO){
 
-        if(ativoController.isNomeAtivoIsNotEmpty(ativo)){
-            return Response.ok("Ativo não foi encontrado").type(MediaType.APPLICATION_JSON_TYPE).build();
-        }
-
-        AtivoVO ativoEntity = ativoController.update(codAtivo, ativo);
+        AtivoVO ativoEntity = ativoController.update(codAtivo, ativoDTO);
 
         return Response.ok(AtivoDTO.transformaEmDTO(ativoEntity)).build();
     }
@@ -79,7 +76,6 @@ public class AtivoResource {
         };
 
         ativoEntity.delete();
-
         return Response.status(Response.Status.NO_CONTENT).build();
     }
     
