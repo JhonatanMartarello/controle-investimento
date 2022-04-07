@@ -36,7 +36,7 @@ public class AtivoResource {
     }
 
     @GET
-    @Path("{codAtivo}")
+    @Path("/buscar/{codAtivo}")
     public Response findById(@PathParam("codAtivo") Long codAtivo){
 
         AtivoVO ativoVO = AtivoVO.findById(codAtivo);
@@ -48,6 +48,7 @@ public class AtivoResource {
     }
 
     @POST
+    @Path("/incluir")
     @Transactional
     public Response create(AtivoDTO ativoDTO) {
         AtivoVO.persist(new AtivoVO().transformaEmObjeto(ativoDTO));
@@ -55,7 +56,7 @@ public class AtivoResource {
     }
 
     @PUT
-    @Path("{codAtivo}")
+    @Path("/alterar/{codAtivo}")
     @Transactional
     public Response update(@PathParam("codAtivo") Long codAtivo, AtivoDTO ativoDTO){
 
@@ -65,7 +66,7 @@ public class AtivoResource {
     }
 
     @DELETE
-    @Path("{codAtivo}")
+    @Path("/deletar/{codAtivo}")
     @Transactional
     public Response delete(@PathParam("codAtivo") Long codAtivo) {
 

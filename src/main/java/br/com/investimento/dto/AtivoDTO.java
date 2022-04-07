@@ -17,7 +17,7 @@ public class AtivoDTO {
         return new AtivoDTO(ativo.getCodAtivo(), ativo.getCodigoNegociacao(), ativo.getNome(), ativo.getCnpj(), ativo.getTipoAtivo());
     }
 
-    public static List<AtivoDTO> transformaEmDTO(List<AtivoVO> listAtivo){
+    public List<AtivoDTO> transformaEmDTO(List<AtivoVO> listAtivo){
         List<AtivoDTO> listaAtivoDTO = new ArrayList<>();
         for(AtivoVO ativo : listAtivo){
             listaAtivoDTO.add(AtivoDTO.transformaEmDTO(ativo));

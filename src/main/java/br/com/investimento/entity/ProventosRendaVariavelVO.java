@@ -13,7 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_prv_proventos_renda_variavel")
+@Table(name = "tb_proventos_renda_variavel")
 public class ProventosRendaVariavelVO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

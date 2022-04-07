@@ -14,7 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_mrv_movimento_renda_variavel")
+@Table(name = "tb_movimento_renda_variavel")
 public class MovimentoRendaVariavelVO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

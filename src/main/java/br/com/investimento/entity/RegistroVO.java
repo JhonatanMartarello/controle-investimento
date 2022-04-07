@@ -9,9 +9,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
+import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
+
 @Entity
-@Table(name = "tb_reg_registro")
-public class RegistroVO {
+@Table(name = "tb_registro")
+public class RegistroVO extends PanacheEntityBase{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "reg_cod_registro")

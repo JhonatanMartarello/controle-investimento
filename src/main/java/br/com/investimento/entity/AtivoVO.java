@@ -17,7 +17,7 @@ import br.com.investimento.dto.AtivoDTO;
 import io.quarkus.hibernate.orm.panache.PanacheEntityBase;
 
 @Entity
-@Table(name = "tb_ati_ativo")
+@Table(name = "tb_ativo")
 public class AtivoVO extends PanacheEntityBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

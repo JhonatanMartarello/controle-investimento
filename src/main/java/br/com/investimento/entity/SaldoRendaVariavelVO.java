@@ -13,7 +13,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_srv_saldo_renda_variavel")
+@Table(name = "tb_saldo_renda_variavel")
 public class SaldoRendaVariavelVO {
     @Id
     @Column(name = "srv_cod_resultado")

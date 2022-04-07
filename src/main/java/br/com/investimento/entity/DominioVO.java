@@ -11,7 +11,7 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_dom_dominio")
+@Table(name = "tb_dominio")
 public class DominioVO {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
